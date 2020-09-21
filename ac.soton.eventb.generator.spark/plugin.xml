@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any">
+         <command
+               commandId="ac.soton.eventb.generator.spark.EventB2SPARK"
+               label="Translate to SPARK"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="ac.soton.eventb.generator.spark.isIEventBRoot">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="ac.soton.eventb.internal.generator.spark.handler.SparkTranslate"
+            id="ac.soton.eventb.generator.spark.EventB2SPARK"
+            name="%EventB2SPARKCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="ac.soton.eventb.generator.spark.isIEventBRoot">
+         <and>
+            <count
+                  value="1">
+            </count>
+            <iterate
+                  operator="or">
+               <instanceof
+                     value="org.eventb.core.IMachineRoot">
+               </instanceof>
+            </iterate>
+         </and>
+      </definition>
+   </extension>
+
+</plugin>
